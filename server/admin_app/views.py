@@ -68,4 +68,5 @@ def delete(request):
             return redirect('/profile')
 
 def logout(request):
-    pass
+    request.session.pop('logged_user',None)
+    return redirect('/')

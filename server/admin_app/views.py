@@ -46,15 +46,26 @@ def signup(request):
         
 
 def profile(request):
-    if request.method == 'POST':
-        pass
-    elif request.method == 'GET':
-        return render(request, 'profile.html', {"name": "Rahul Chaudhary", "email": "rahulchaudhary99r@gmail.com", "mobile": "9555269399", "ids": ["abc@gmail.com", "xyz@gmail.com"]})
-        
+    if 'logged_user' in request.session:
+        logged_user = request.session['logged_user']
+        profile_user = UserInfo.objects.get(email=logged_user)
+        users = UserInfo.objects.all()
+        print(users)
+        return render(request, 'profile.html', {"name": profile_user.first_name, "email": profile_user.email, "mobile": profile_user.mobile, "ids": [e.email for e in users]})
+    
 
 
 def delete(request):
-    pass
+    if request.method == 'POST':
+        email = request.POST['login_ids']
+        user = UserInfo.objects.get(email=email)
+        user.delete()
+        logged_user = request.session['logged_user']
+        if email == logged_user:
+            request.session.pop('logged_user',None)
+            return redirect('/signin')
+        else:
+            return redirect('/profile')
 
 def logout(request):
     pass

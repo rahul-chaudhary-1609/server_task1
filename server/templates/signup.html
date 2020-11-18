@@ -8,42 +8,47 @@
         <div class="col-sm-4 offset-sm-4"
             style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
             <h4 class="text-center mt-4 mb-4">Sign Up</h4>
-            <form action="" method="POST">
+            <form action="signup" method="POST">
+                {% csrf_token %}
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="fname">First Name</span>
                     </div>
-                    <input type="text" class="form-control" id="fname" name="fname" aria-describedby="fname">
+                    <input type="text" class="form-control" required id="fname" name="fname" aria-describedby="fname">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="lname">Last Name</span>
                     </div>
-                    <input type="text" class="form-control" id="lname" name="lname" aria-describedby="lname">
+                    <input type="text" class="form-control" id="lname" required  name="lname" aria-describedby="lname">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="login_id">Email ID</span>
                     </div>
-                    <input type="email" class="form-control" id="login_id" name="login_id" aria-describedby="login_id">
+                    <input type="email" class="form-control" id="login_id"  required  name="login_id" aria-describedby="login_id">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="mobile">Mobile</span>
                     </div>
-                    <input type="email" class="form-control" pattern="/(7|8|9)\d{9}/" title="should starts with 7 or 8 or 9, and then followed by 9 digits." id="mobile" name="mobile" aria-describedby="mobile">
+                    <input type="text" class="form-control" pattern="[7-9]{1}\d{9}"  required  title="should starts with 7 or 8 or 9, and then followed by 9 digits." id="mobile" name="mobile" aria-describedby="mobile">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="login_pass">Password</span>
                     </div>
-                    <input type="text" class="form-control" id="login_pass" name="login_pass"
-                        aria-describedby="login_pass">
+                    <input type="password" class="form-control" id="login_pass" name="login_pass" required  aria-describedby="login_pass">
                 </div>
                 <div class="input-group mb-3">
                     <input type="submit" class="form-control btn btn-primary" value="Singup" id="signup" name="signup">
                 </div>
             </form>
+            {% for message in messages %}
+            <div class="alert alert-info mt-2" role="alert">
+                {{message}}
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

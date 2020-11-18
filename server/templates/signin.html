@@ -7,18 +7,19 @@
     <div class="row">
         <div class="col-sm-4 offset-sm-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
             <h4 class="text-center mt-4 mb-4">Login</h4>
-            <form action="" method="POST">
+            <form action="signin" method="POST">
+                {% csrf_token %}
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="login_id">Login ID</span>
                     </div>
-                    <input type="text" class="form-control" id="login_id" name="login_id" aria-describedby="login_id">
+                    <input type="text" class="form-control" required id="login_id" name="login_id" aria-describedby="login_id">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="login_pass">Password</span>
                     </div>
-                    <input type="text" class="form-control" id="login_pass" name="login_pass" aria-describedby="login_pass">
+                    <input type="password" class="form-control" required id="login_pass" name="login_pass" aria-describedby="login_pass">
                 </div>
                 <div class="input-group mb-3">
                     <input type="submit" class="form-control btn btn-primary" value="Login" id="signin" name="signin">

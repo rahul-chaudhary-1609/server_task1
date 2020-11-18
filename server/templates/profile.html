@@ -21,12 +21,13 @@
             </div>
            
             
-            <form class="form-inline ml-5" action="" method="POST">
+            <form class="form-inline ml-5" action="delete" method="POST">
+                {% csrf_token %}
                 <div class="input-group mb-5">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="fname">Email/Login Id's in database:</span>
+                        <span class="input-group-text" id="fname">Email Id's in database:</span>
                     </div>
-                    <select name="login_ids" id="login_ids">
+                    <select name="login_ids" required id="login_ids">
                         {% for id in ids%}
                         <option>{{id}}</option>
                         {% endfor %}

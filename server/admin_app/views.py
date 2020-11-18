@@ -7,7 +7,15 @@ from django.contrib import messages
 
 def signin(request):
     if request.method == 'POST':
-        pass
+        email = request.POST['login_id']
+        password = request.POST['login_pass']
+        if UserInfo.objects.filter(email=email,password=password).exists():
+            request.session['logged_user'] = email
+            #request.session.set_expiry(3000)
+            return redirect('/profile')        
+        else:
+            return redirect('/signup')
+
     elif request.method=='GET':
         return render(request,'signin.html')
     
@@ -24,7 +32,7 @@ def signup(request):
             user=UserInfo(first_name=first_name, last_name=last_name, mobile=mobile, password=password, email=email)
             user.save()
             request.session['logged_user'] = email
-            request.session.set_expiry(3000)
+            #request.session.set_expiry(3000)
             messages.success(request, 'Registration Succesfull')
             return redirect('/profile')
         
